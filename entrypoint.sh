@@ -21,17 +21,13 @@ SSHG_KEY_PRIVATE_PATH="$SSH_PATH/github_action"
 #     export WPE_ENV_NAME=${INPUT_NEW_ENV_NAME};    
 ###
 
-if [[ $GITHUB_REF =~ ${INPUT_PRD_BRANCH}$ ]]; then
-    export WPE_ENV_NAME=$INPUT_PRD_ENV;
-elif [[ $GITHUB_REF =~ ${INPUT_STG_BRANCH}$ ]]; then
-    export WPE_ENV_NAME=$INPUT_STG_ENV;
-elif [[ $GITHUB_REF =~ ${INPUT_DEV_BRANCH}$ ]]; then
-    export WPE_ENV_NAME=$INPUT_DEV_ENV;    
+if [[ $GITHUB_REF =~ ${INPUT_BRANCH}$ ]]; then
+    export ENV_NAME=$INPUT_ENVIROMENT; 
 else 
     echo "FAILURE: Branch name required." && exit 1;
 fi
 
-echo "Deploying $GITHUB_REF to $WPE_ENV_NAME..."
+echo "Deploying $GITHUB_REF to $ENV_NAME..."
 
 #Deploy Vars
 WPE_SSH_HOST="162.241.194.20"

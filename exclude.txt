@@ -13,6 +13,7 @@
 *.bak
 *.swp
 Thumbs.db
+node_modules
 
 # WordPress specific files
 # NOTE:
