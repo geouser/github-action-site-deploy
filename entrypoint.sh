@@ -31,6 +31,7 @@ echo "Deploying $GITHUB_REF to $WPE_ENV_NAME..."
 
 #Deploy Vars
 REMOTE_SSH_HOST=$INPUT_SSH_REMOTE_HOST
+REMOTE_SSH_PORT=$INPUT_SSH_REMOTE_PORT
 DIR_PATH="deploy-test"
 SRC_PATH="."
  
@@ -52,4 +53,4 @@ chmod 600 "$SSHG_KEY_PRIVATE_PATH"
 
 # Deploy via SSH
 # Exclude restricted paths from exclude.txt
-rsync --rsh="ssh -v -p 2222 -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"
+rsync --rsh="ssh -v -p $REMOTE_SSH_PORT -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"

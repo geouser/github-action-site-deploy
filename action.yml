@@ -13,6 +13,9 @@ inputs:
   SSH_REMOTE_USER:
     description: "The SSH User you will save in the Github Secrets"
     required: true
+  SSH_REMOTE_PORT:
+    description: "The SSH Port you will save in the Github Secrets"
+    required: true
   PHP_LINT:
     description: "optional php syntax check"
     required: false
