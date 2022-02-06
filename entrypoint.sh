@@ -33,6 +33,8 @@ echo "Deploying $GITHUB_REF to $ENV_NAME..."
 SSH_HOST=$INPUT_SSH_HOST
 REMOTE_DIR_PATH=$INPUT_SSH_REMOTE_PATH
 SRC_PATH=$INPUT_LOCAL_SRC_PATH
+
+
  
 # Set up our user and path
 
@@ -52,4 +54,4 @@ chmod 600 "$SSHG_KEY_PRIVATE_PATH"
 
 # Deploy via SSH
 # Exclude restricted paths from exclude.txt
-rsync --rsh="ssh -v -p 2222 -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$DESTINATION"
+rsync --rsh="ssh -v -p $INPUT_SSH_PORT -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$DESTINATION"
