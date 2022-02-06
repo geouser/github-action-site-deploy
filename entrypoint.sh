@@ -2,12 +2,12 @@
 
 set -e
 
-: ${INPUT_WPE_SSHG_KEY_PRIVATE?Required secret not set.}
+: ${INPUT_SSHG_KEY_PRIVATE?Required secret not set.}
 
 #SSH Key Vars 
 SSH_PATH="$HOME/.ssh"
 KNOWN_HOSTS_PATH="$SSH_PATH/known_hosts"
-WPE_SSHG_KEY_PRIVATE_PATH="$SSH_PATH/github_action"
+SSHG_KEY_PRIVATE_PATH="$SSH_PATH/github_action"
 
 
 ###
@@ -34,51 +34,26 @@ fi
 echo "Deploying $GITHUB_REF to $WPE_ENV_NAME..."
 
 #Deploy Vars
-WPE_SSH_HOST="$WPE_ENV_NAME.ssh.wpengine.net"
-DIR_PATH="$INPUT_TPO_PATH"
-SRC_PATH="$INPUT_TPO_SRC_PATH"
+WPE_SSH_HOST="162.241.194.20"
+DIR_PATH="/home1/olehrusyi/deploy-test"
+SRC_PATH="$HOME"
  
 # Set up our user and path
 
-WPE_SSH_USER="$WPE_ENV_NAME"@"$WPE_SSH_HOST"
-WPE_DESTINATION=wpe_gha+"$WPE_SSH_USER":sites/"$WPE_ENV_NAME"/"$DIR_PATH"
+WPE_SSH_USER="olehrusyi"@"$WPE_SSH_HOST"
+WPE_DESTINATION="$DIR_PATH"
 
 # Setup our SSH Connection & use keys
 mkdir "$SSH_PATH"
 ssh-keyscan -t rsa "$WPE_SSH_HOST" >> "$KNOWN_HOSTS_PATH"
 
 #Copy Secret Keys to container
-echo "$INPUT_WPE_SSHG_KEY_PRIVATE" > "$WPE_SSHG_KEY_PRIVATE_PATH"
+echo "$INPUT_SSHG_KEY_PRIVATE" > "$SSHG_KEY_PRIVATE_PATH"
 #Set Key Perms 
 chmod 700 "$SSH_PATH"
 chmod 644 "$KNOWN_HOSTS_PATH"
-chmod 600 "$WPE_SSHG_KEY_PRIVATE_PATH"
-
-# Lint before deploy
-if [ "${INPUT_PHP_LINT^^}" == "TRUE" ]; then
-    echo "Begin PHP Linting."
-    for file in $(find $SRC_PATH/ -name "*.php"); do
-        php -l $file
-        status=$?
-        if [[ $status -ne 0 ]]; then
-            echo "FAILURE: Linting failed - $file :: $status" && exit 1
-        fi
-    done
-    echo "PHP Lint Successful! No errors detected!"
-else 
-    echo "Skipping PHP Linting."
-fi
-
+chmod 600 "$SSHG_KEY_PRIVATE_PATH"
 
 # Deploy via SSH
 # Exclude restricted paths from exclude.txt
-rsync --rsh="ssh -v -p 22 -i ${WPE_SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"
-
-# Post deploy clear cache 
-if [ "${INPUT_CACHE_CLEAR^^}" == "TRUE" ]; then
-    echo "Clearing WP Engine Cache..."
-    ssh -v -p 22 -i ${WPE_SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no $WPE_SSH_USER "cd sites/${WPE_ENV_NAME} && wp page-cache flush"
-    echo "SUCCESS: Site has been deployed and cache has been flushed."
-else
-    echo "Skipping Cache Clear."
-fi
+rsync --rsh="ssh -v -p 22 -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"

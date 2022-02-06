@@ -1,10 +1,10 @@
-name: "Deploy WordPress to WP Engine"
+name: "Deploy WordPress to Server"
 branding:
   icon: "upload-cloud"
   color: "blue"
-description: "Deploy WordPress projects to a WP Engine account using SSH Gateway"
+description: "Deploy WordPress projects to a Server using SSH Gateway"
 inputs:
-  WPE_SSHG_KEY_PRIVATE:
+  SSHG_KEY_PRIVATE:
     description: "The private RSA key you will save in the Github Secrets"
     required: true
   PHP_LINT:
@@ -15,10 +15,6 @@ inputs:
     description: "Optional flags for the deployment"
     required: true
     default: '-azvr --inplace --exclude=".*"'
-  CACHE_CLEAR:
-    description: "Optional WPE Clear cache"
-    required: false
-    default: true
   TPO_SRC_PATH:
     description: "An optional source directory to deploy other than the root directory that is being versioned."
     default: "."
