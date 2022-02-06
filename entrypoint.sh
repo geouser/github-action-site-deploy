@@ -2,7 +2,7 @@
 
 set -e
 
-: ${INPUT_SSHG_KEY_PRIVATE?Required secret not set.}
+: ${INPUT_SSH_KEY_PRIVATE?Required secret not set.}
 
 #SSH Key Vars 
 SSH_PATH="$HOME/.ssh"
@@ -30,14 +30,14 @@ fi
 echo "Deploying $GITHUB_REF to $ENV_NAME..."
 
 #Deploy Vars
-SSH_HOST="162.241.194.20"
-DIR_PATH="deploy-test"
-SRC_PATH="."
+SSH_HOST=$INPUT_SSH_HOST
+REMOTE_DIR_PATH=$INPUT_SSH_REMOTE_PATH
+SRC_PATH=$INPUT_LOCAL_SRC_PATH
  
 # Set up our user and path
 
-SSH_USER="olehrusyi"@"$SSH_HOST"
-DESTINATION=$SSH_USER":"$DIR_PATH
+SSH_USER="$INPUT_SSH_USER"@"$SSH_HOST"
+DESTINATION=$SSH_USER":"$REMOTE_DIR_PATH
 
 # Setup our SSH Connection & use keys
 mkdir "$SSH_PATH"

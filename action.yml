@@ -4,8 +4,17 @@ branding:
   color: "blue"
 description: "Deploy WordPress projects to a Server using SSH Gateway"
 inputs:
-  SSHG_KEY_PRIVATE:
+  SSH_KEY_PRIVATE:
     description: "The private RSA key you will save in the Github Secrets"
+    required: true
+  SSH_HOST:
+    description: "The SSH Host you will save in GitHub Secrets"
+    required: true
+  SSH_USER:
+    description: "The SSH User you will save in GitHub Secrets"
+    required: true
+  SSH_PORT:
+    description: "The SSH Port you will save in GitHub Secrets"
     required: true
   PHP_LINT:
     description: "optional php syntax check"
@@ -15,11 +24,11 @@ inputs:
     description: "Optional flags for the deployment"
     required: true
     default: '-azvr --inplace --exclude=".*"'
-  TPO_SRC_PATH:
+  LOCAL_SRC_PATH:
     description: "An optional source directory to deploy other than the root directory that is being versioned."
     default: "."
     required: false
-  TPO_PATH:
+  SSH_REMOTE_PATH:
     description: "An optional destination directory to deploy to other than the WordPress root."
     default: ""
     required: false
