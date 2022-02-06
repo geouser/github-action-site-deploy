@@ -30,18 +30,18 @@ fi
 echo "Deploying $GITHUB_REF to $ENV_NAME..."
 
 #Deploy Vars
-WPE_SSH_HOST="162.241.194.20"
+SSH_HOST="162.241.194.20"
 DIR_PATH="deploy-test"
 SRC_PATH="."
  
 # Set up our user and path
 
-WPE_SSH_USER="olehrusyi"@"$WPE_SSH_HOST"
-WPE_DESTINATION=$WPE_SSH_USER":"$DIR_PATH
+SSH_USER="olehrusyi"@"$SSH_HOST"
+DESTINATION=$SSH_USER":"$DIR_PATH
 
 # Setup our SSH Connection & use keys
 mkdir "$SSH_PATH"
-ssh-keyscan -t rsa "$WPE_SSH_HOST" >> "$KNOWN_HOSTS_PATH"
+ssh-keyscan -t rsa "$SSH_HOST" >> "$KNOWN_HOSTS_PATH"
 
 #Copy Secret Keys to container
 echo "$INPUT_SSHG_KEY_PRIVATE" > "$SSHG_KEY_PRIVATE_PATH"
@@ -52,4 +52,4 @@ chmod 600 "$SSHG_KEY_PRIVATE_PATH"
 
 # Deploy via SSH
 # Exclude restricted paths from exclude.txt
-rsync --rsh="ssh -v -p 2222 -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"
+rsync --rsh="ssh -v -p 2222 -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$DESTINATION"

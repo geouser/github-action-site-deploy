@@ -23,30 +23,14 @@ inputs:
     description: "An optional destination directory to deploy to other than the WordPress root."
     default: ""
     required: false
-  PRD_BRANCH: 
-    description: "Source branch to deploy PRD_ENV"
+  BRANCH: 
+    description: "Source branch to deploy ENVIROMENT"
     required: true
     default: "PROD_BRANCH_HERE"
-  PRD_ENV:
+  ENVIROMENT:
     description: "Destination to deploy to WPE Prod"
     required: true
     default: "PROD_ENV_HERE"
-  STG_BRANCH: 
-    description: "Source branch to deploy STG_ENV"
-    required: false
-    default: "STAGE_BRANCH_HERE"
-  STG_ENV:
-    description: "Destination to deploy to WPE Stage"
-    required: false
-    default: "STAGE_ENV_HERE"
-  DEV_BRANCH: 
-    description: "Source branch to deploy DEV_ENV"
-    required: false
-    default: "DEV_BRANCH_HERE"
-  DEV_ENV:
-    description: "Destination to deploy to WPE Dev"
-    required: false
-    default: "DEV_ENV_HERE"
 
 runs:
   using: "docker"
