@@ -32,7 +32,7 @@ echo "Deploying $GITHUB_REF to $WPE_ENV_NAME..."
 #Deploy Vars
 REMOTE_SSH_HOST=$INPUT_SSH_REMOTE_HOST
 REMOTE_SSH_PORT=$INPUT_SSH_REMOTE_PORT
-DIR_PATH="deploy-test"
+DIR_PATH=$INPUT_DIST_DIR
 SRC_PATH="."
  
 # Set up our user and path

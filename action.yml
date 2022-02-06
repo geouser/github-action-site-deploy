@@ -16,6 +16,9 @@ inputs:
   SSH_REMOTE_PORT:
     description: "The SSH Port you will save in the Github Secrets"
     required: true
+  DIST_DIR:
+    description: "Destination directory on the server"
+    required: true
   PHP_LINT:
     description: "optional php syntax check"
     required: false
