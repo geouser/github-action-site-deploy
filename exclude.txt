@@ -23,7 +23,7 @@ package.json
 Thumbs.db
 
 src/
-node_modules/
+node_modules
 
 docker_tag
 DOCKER_ENV
