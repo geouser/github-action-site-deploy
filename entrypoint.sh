@@ -7,7 +7,7 @@ set -e
 #SSH Key Vars 
 SSH_PATH="$HOME/.ssh"
 KNOWN_HOSTS_PATH="$SSH_PATH/known_hosts"
-SSHG_KEY_PRIVATE_PATH="$SSH_PATH/github_action"
+SSH_KEY_PRIVATE_PATH="$SSH_PATH/github_action"
 
 
 ###
@@ -30,15 +30,13 @@ fi
 echo "Deploying $GITHUB_REF to $ENV_NAME..."
 
 #Deploy Vars
-SSH_HOST=$INPUT_SSH_HOST
-REMOTE_DIR_PATH=$INPUT_SSH_REMOTE_PATH
-SRC_PATH=$INPUT_LOCAL_SRC_PATH
-
-echo "Host: $SSH_HOST"
+SSH_HOST="162.241.194.20"
+REMOTE_DIR_PATH="deploy-test"
+SRC_PATH="."
  
 # Set up our user and path
 
-SSH_USER="$INPUT_SSH_USER"@"$SSH_HOST"
+SSH_USER="olehrusyi"@"$SSH_HOST"
 DESTINATION=$SSH_USER":"$REMOTE_DIR_PATH
 
 # Setup our SSH Connection & use keys
@@ -46,12 +44,12 @@ mkdir "$SSH_PATH"
 ssh-keyscan -t rsa "$SSH_HOST" >> "$KNOWN_HOSTS_PATH"
 
 #Copy Secret Keys to container
-echo "$INPUT_SSHG_KEY_PRIVATE" > "$SSHG_KEY_PRIVATE_PATH"
+echo "$INPUT_SSHG_KEY_PRIVATE" > "$SSH_KEY_PRIVATE_PATH"
 #Set Key Perms 
 chmod 700 "$SSH_PATH"
 chmod 644 "$KNOWN_HOSTS_PATH"
-chmod 600 "$SSHG_KEY_PRIVATE_PATH"
+chmod 600 "$SSH_KEY_PRIVATE_PATH"
 
 # Deploy via SSH
 # Exclude restricted paths from exclude.txt
-rsync --rsh="ssh -v -p $INPUT_SSH_PORT -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$DESTINATION"
+rsync --rsh="ssh -v -p 2222 -i ${SSH_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$DESTINATION"
