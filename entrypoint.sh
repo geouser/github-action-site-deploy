@@ -30,18 +30,18 @@ fi
 echo "Deploying $GITHUB_REF to $WPE_ENV_NAME..."
 
 #Deploy Vars
-WPE_SSH_HOST="162.241.194.20"
+REMOTE_SSH_HOST=$INPUT_SSH_REMOTE_HOST
 DIR_PATH="deploy-test"
 SRC_PATH="."
  
 # Set up our user and path
 
-WPE_SSH_USER="olehrusyi"@"$WPE_SSH_HOST"
-WPE_DESTINATION=$WPE_SSH_USER":"$DIR_PATH
+REMOTE_SSH_USER="olehrusyi"@"$REMOTE_SSH_HOST"
+WPE_DESTINATION=$REMOTE_SSH_USER":"$DIR_PATH
 
 # Setup our SSH Connection & use keys
 mkdir "$SSH_PATH"
-ssh-keyscan -t rsa "$WPE_SSH_HOST" >> "$KNOWN_HOSTS_PATH"
+ssh-keyscan -t rsa "$REMOTE_SSH_HOST" >> "$KNOWN_HOSTS_PATH"
 
 #Copy Secret Keys to container
 echo "$INPUT_SSH_KEY_PRIVATE" > "$SSHG_KEY_PRIVATE_PATH"
