@@ -36,7 +36,7 @@ SRC_PATH="."
  
 # Set up our user and path
 
-REMOTE_SSH_USER="olehrusyi"@"$REMOTE_SSH_HOST"
+REMOTE_SSH_USER="$INPUT_SSH_REMOTE_USER"@"$REMOTE_SSH_HOST"
 WPE_DESTINATION=$REMOTE_SSH_USER":"$DIR_PATH
 
 # Setup our SSH Connection & use keys
