@@ -36,7 +36,7 @@ echo "Deploying $GITHUB_REF to $WPE_ENV_NAME..."
 #Deploy Vars
 WPE_SSH_HOST="162.241.194.20"
 DIR_PATH="deploy-test"
-SRC_PATH="$HOME"
+SRC_PATH="."
  
 # Set up our user and path
 
