@@ -22,8 +22,8 @@ package.json
 *.swp
 Thumbs.db
 
-src/
-node_modules
+/src
+/node_modules
 
 docker_tag
 DOCKER_ENV
