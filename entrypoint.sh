@@ -41,7 +41,7 @@ SRC_PATH="$HOME"
 # Set up our user and path
 
 WPE_SSH_USER="olehrusyi"@"$WPE_SSH_HOST"
-WPE_DESTINATION=$WPE_SSH_USER":home1/olehrusyi/"$DIR_PATH
+WPE_DESTINATION=$WPE_SSH_USER":"$DIR_PATH
 
 # Setup our SSH Connection & use keys
 mkdir "$SSH_PATH"
