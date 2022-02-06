@@ -30,18 +30,18 @@ fi
 echo "Deploying $GITHUB_REF to $ENV_NAME..."
 
 #Deploy Vars
-SSH_HOST="162.241.194.20"
+REMOTE_SERVER="162.241.194.20"
 REMOTE_DIR_PATH="deploy-test"
 SRC_PATH="."
  
 # Set up our user and path
 
-SSH_USER="olehrusyi"@"$SSH_HOST"
+SSH_USER="olehrusyi"@"$REMOTE_SERVER"
 DESTINATION=$SSH_USER":"$REMOTE_DIR_PATH
 
 # Setup our SSH Connection & use keys
 mkdir "$SSH_PATH"
-ssh-keyscan -t rsa "$SSH_HOST" >> "$KNOWN_HOSTS_PATH"
+ssh-keyscan -t rsa "$REMOTE_SERVER" >> "$KNOWN_HOSTS_PATH"
 
 #Copy Secret Keys to container
 echo "$INPUT_SSHG_KEY_PRIVATE" > "$SSH_KEY_PRIVATE_PATH"
