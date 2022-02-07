@@ -53,4 +53,4 @@ chmod 600 "$SSHG_KEY_PRIVATE_PATH"
 
 # Deploy via SSH
 # Exclude restricted paths from exclude.txt
-rsync --rsh="ssh -v -p $REMOTE_SSH_PORT -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"
+rsync --delete --rsh="ssh -v -p $REMOTE_SSH_PORT -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"
