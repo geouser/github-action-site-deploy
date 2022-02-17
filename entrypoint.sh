@@ -49,7 +49,7 @@ mkdir "$SSH_PATH"
 
 echo "Dir - ok"
 
-ssh-keyscan -t rsa "$REMOTE_SSH_HOST" >> "$KNOWN_HOSTS_PATH"
+ssh-keyscan -t rsa -p $REMOTE_SSH_PORT "$REMOTE_SSH_HOST" >> "$KNOWN_HOSTS_PATH"
 
 echo "Scan - ok"
 
