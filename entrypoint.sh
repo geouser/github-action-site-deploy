@@ -46,7 +46,12 @@ echo "User - ok"
 
 # Setup our SSH Connection & use keys
 mkdir "$SSH_PATH"
+
+echo "Dir - ok"
+
 ssh-keyscan -t rsa "$REMOTE_SSH_HOST" >> "$KNOWN_HOSTS_PATH"
+
+echo "Scan - ok"
 
 #Copy Secret Keys to container
 echo "$INPUT_SSH_KEY_PRIVATE" > "$SSHG_KEY_PRIVATE_PATH"
