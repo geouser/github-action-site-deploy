@@ -34,11 +34,15 @@ REMOTE_SSH_HOST=$INPUT_SSH_REMOTE_HOST
 REMOTE_SSH_PORT=$INPUT_SSH_REMOTE_PORT
 DIR_PATH=$INPUT_DIST_DIR
 SRC_PATH=$INPUT_LOCAL_DIR
+
+echo "Vars - ok"
  
 # Set up our user and path
 
 REMOTE_SSH_USER="$INPUT_SSH_REMOTE_USER"@"$REMOTE_SSH_HOST"
 WPE_DESTINATION=$REMOTE_SSH_USER":"$DIR_PATH
+
+echo "User - ok"
 
 # Setup our SSH Connection & use keys
 mkdir "$SSH_PATH"
@@ -50,6 +54,8 @@ echo "$INPUT_SSH_KEY_PRIVATE" > "$SSHG_KEY_PRIVATE_PATH"
 chmod 700 "$SSH_PATH"
 chmod 644 "$KNOWN_HOSTS_PATH"
 chmod 600 "$SSHG_KEY_PRIVATE_PATH"
+
+echo "Key - ok"
 
 # Deploy via SSH
 # Exclude restricted paths from exclude.txt
