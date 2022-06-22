@@ -31,6 +31,10 @@ inputs:
     description: "Optional flags for the deployment"
     required: true
     default: '-azvr --inplace --exclude=".*"'
+  DELETE_FLAG:
+    description: "Delete files that was removed from source"
+    required: true
+    default: '--delete'
   BRANCH: 
     description: "Source branch to deploy ENVIROMENT"
     required: true

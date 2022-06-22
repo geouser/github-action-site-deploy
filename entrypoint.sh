@@ -64,4 +64,4 @@ echo "Key - ok"
 
 # Deploy via SSH
 # Exclude restricted paths from exclude.txt
-rsync --delete --rsh="ssh -v -p $REMOTE_SSH_PORT -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"
+rsync $INPUT_DELETE_FLAG --rsh="ssh -v -p $REMOTE_SSH_PORT -i ${SSHG_KEY_PRIVATE_PATH} -o StrictHostKeyChecking=no" $INPUT_FLAGS --exclude-from='/exclude.txt' $SRC_PATH "$WPE_DESTINATION"
