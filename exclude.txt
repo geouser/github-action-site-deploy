@@ -27,4 +27,5 @@ Thumbs.db
 
 docker_tag
 DOCKER_ENV
+Dockerfile-php-build
 output.log
