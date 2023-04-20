@@ -18,6 +18,7 @@ composer.lock
 gulpfile.js
 package-lock.json
 package.json
+auth.json
 *.bak
 *.swp
 Thumbs.db
