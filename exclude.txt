@@ -23,7 +23,7 @@ auth.json
 *.swp
 Thumbs.db
 
-/src
+src
 /node_modules
 
 docker_tag
