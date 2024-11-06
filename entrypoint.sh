@@ -45,7 +45,9 @@ WPE_DESTINATION=$REMOTE_SSH_USER":"$DIR_PATH
 echo "User - ok"
 
 # Setup our SSH Connection & use keys
-mkdir "$SSH_PATH"
+if [ ! -d "$SSH_PATH" ]; then
+  mkdir -p "$SSH_PATH"
+fi
 
 echo "Dir - ok"
 
@@ -53,7 +55,7 @@ ssh-keyscan -t rsa -p "$REMOTE_SSH_PORT" "$REMOTE_SSH_HOST" >> "$KNOWN_HOSTS_PAT
 
 echo "Scan - ok"
 
-#Copy Secret Keys to container
+#Copy Secret Keys to the container
 echo "$INPUT_SSH_KEY_PRIVATE" > "$SSHG_KEY_PRIVATE_PATH"
 #Set Key Perms 
 chmod 700 "$SSH_PATH"
